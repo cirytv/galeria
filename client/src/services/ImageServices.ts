@@ -1,23 +1,38 @@
 import axios from 'axios'
 import { safeParse } from 'valibot'
-import { DraftImageSchema, Image } from '../types'
+import { DraftImageSchema, Image, ImagesSchema } from '../types'
 
 type ImageData = {
   [k: string]: FormDataEntryValue
 }
 
+export async function getImages() {
+  try {
+    const url = `${import.meta.env.VITE_API_URL}/api/images`
+    const { data } = await axios(url)
+    const result = safeParse(ImagesSchema, data.data)
+    if (result.success) {
+      return result.output
+    } else {
+      throw new Error('Hubo un error...')
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export async function addImage(data: ImageData) {
   try {
     const result = safeParse(DraftImageSchema, {
-      image: data.image,
+      // image: data.image,
       name: data.name,
       description: data.description,
       publisher: data.publisher,
     })
     if (result.success) {
-      const url = `${import.meta.env.VITE_API_URL}/api/products`
+      const url = `${import.meta.env.VITE_API_URL}/api/images`
       await axios.post(url, {
-        image: result.output.image,
+        // image: result.output.image,
         name: result.output.name,
         description: result.output.description,
         publisher: result.output.publisher,

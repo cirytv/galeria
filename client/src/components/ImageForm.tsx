@@ -37,7 +37,7 @@ export default function ImageForm({ product }: ProductFormProps) {
 
       <div className="mb-4">
         <label className="text-gray-800" htmlFor="price">
-          Descripcion
+          Publisher
         </label>
         <input
           id="publisher"

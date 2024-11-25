@@ -1,14 +1,12 @@
 import { Router } from 'express'
-import { body, param } from 'express-validator'
 import {
   getImages,
   createImage,
   deleteImage,
   getImageById,
   updateImage,
-  upload,
+  // upload,
 } from './handlers/image'
-import { handleInputErrors } from './middleware'
 
 const router = Router()
 
@@ -18,7 +16,7 @@ const router = Router()
 // })
 
 router.get('/', getImages)
-router.post('/', upload, createImage)
+router.post('/', createImage)
 
 router.get('/:id', getImageById as any)
 router.patch('/:id', updateImage as any)

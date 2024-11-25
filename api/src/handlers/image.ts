@@ -29,20 +29,21 @@ export const getImageById = async (req: Request, res: Response) => {
 // }
 
 export const createImage = async (req: Request, res: Response) => {
-  if (!req.file) {
-    res.status(400).json({ error: 'File not provided or invalid format' })
-  } else {
-    let info = {
-      image: req.file.path,
-      name: req.body.name,
-      description: req.body.description,
-      publisher: req.body.publisher,
-    }
-
-    const data = await Image.create(info)
-    res.status(201).send(data)
-    console.log(data)
+  // Descomenta el if cuando se requiera subir imagen
+  // if (!req.file) {
+  //   res.status(400).json({ error: 'File not provided or invalid format' })
+  // } else {
+  let info = {
+    // image: req.file.path,
+    name: req.body.name,
+    description: req.body.description,
+    publisher: req.body.publisher,
   }
+
+  const data = await Image.create(info)
+  res.status(201).send(data)
+  console.log(data)
+  // }
 }
 
 export const updateImage = async (req: Request, res: Response) => {
